@@ -93,5 +93,15 @@ export class RedisService {
     }
   }
 
+  // Function to set key-value pair in Redis
+  async setKeyValue(key: string, value: string): Promise<void> {
+    await this.redis.hset(key, key, value); // Set key-value pair in Redis
+  }
+
+  // Function to get value by key from Redis
+  async getValueByKey(key: string): Promise<string | null> {
+    return await this.redis.hget(key, key); // Get value by key from Redis
+  }
+
   //------------------------User-Redis-Session-Handling-[END]------------------//
 }

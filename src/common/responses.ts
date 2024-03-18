@@ -10,6 +10,7 @@ export const RESPONSE_MSG = {
   INVALID_OTP: 'Incorrect OTP.',
   MOBILE_NO_ALREADY_EXIST: 'Entered Phone number is associated with another account.',
   SESSION_EXPIRED: 'Session Expired.',
+  INTERNAL_SERVER_ERROR: 'Internal Server Error',
 };
 
 export const RESPONSE_DATA = {
@@ -24,5 +25,9 @@ export const RESPONSE_DATA = {
   MOBILE_NO_ALREADY_EXIST: {
     statusCode: HttpStatus.BAD_REQUEST,
     message: RESPONSE_MSG.MOBILE_NO_ALREADY_EXIST,
+  },
+  INTERNAL_SERVER_ERROR: {
+    statusCode: HttpStatus.BAD_REQUEST,
+    message: RESPONSE_MSG.INTERNAL_SERVER_ERROR,
   },
 };

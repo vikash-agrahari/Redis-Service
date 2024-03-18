@@ -1,8 +1,8 @@
 {
-  "name": "backend_plandid",
-  "version": "1.0.0",
-  "description": "Milestone 1",
-  "author": "Plandid",
+  "name": "client",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -22,9 +22,10 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "test:build:dev" : "NODE_ENV=dev nest start && exit"
+    "test:build:dev": "NODE_ENV=dev nest start && exit"
   },
   "dependencies": {
+    "@grpc/grpc-js": "^1.10.3",
     "@nestjs-modules/mailer": "^1.8.1",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.3.0",
