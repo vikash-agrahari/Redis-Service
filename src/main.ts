@@ -9,9 +9,20 @@ import { AppModule } from './app.module';
 import { CONSTANT, Swagger } from './common/constant';
 import { AllExceptionsFilter } from './filters/exceptionFilter';
 import { LoggerMiddleware } from './middlewares/logging.middleware';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { join } from 'path';
 
 async function bootstrap() {
+  const grpcPort: number = 5002;
   const app = await NestFactory.create(AppModule);
+  const grpc = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule,{
+    transport: Transport.GRPC,
+    options: {
+      package: 'serverPackage',
+      protoPath: join(__dirname, '../../proto/server.proto'),
+      url: `localhost:${grpcPort}`,
+    },
+  });
   // Starts listening for shutdown hooks
   app.enableShutdownHooks();
   app.use(
@@ -33,7 +44,7 @@ async function bootstrap() {
   app.useGlobalFilters(new AllExceptionsFilter(httpAdapter));
   const configService = app.get(ConfigService);
   console.log('Port number is: ', configService.get<string>('PORT'));
-  const port: number = configService.get<number>('PORT') ?? 8001;
+  const port: number = configService.get<number>('PORT') ?? 8005;
 
   const config = new DocumentBuilder()
     .setTitle(Swagger.Title)
