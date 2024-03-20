@@ -34,6 +34,7 @@ export class Consumer {
     );
   }
   async acknowledgeChannel(data: any) {
+    console.log(data.channel);
     switch (data.channel) {
       case ENUM.CHANNEL_TYPE.REDIS:
         {
