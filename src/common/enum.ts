@@ -3,5 +3,6 @@ export const ENUM = {
     YOUR_OTP: (otp: string) => 'Your XYZ Verification OTP is ' + otp,
   },
   CHANNEL_TYPE: {
+    REDIS: 'REDIS'
   }
 }
