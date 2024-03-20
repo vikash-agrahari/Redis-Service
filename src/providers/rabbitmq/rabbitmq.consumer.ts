@@ -1,10 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ConfirmChannel } from 'amqplib';
+import { ENUM } from 'src/common/enum';
+import { RedisService } from '../redis/redis.service';
 @Injectable()
 export class Consumer {
   constructor(
-    private readonly configService: ConfigService,
+    private readonly configService: ConfigService, private readonly redisService: RedisService,
   ) {}
   async startConsume(channel: ConfirmChannel) {
     const QUEUE: any = this.configService.get<string>('RABBIT_MQ_QUEUE');
@@ -32,7 +34,12 @@ export class Consumer {
     );
   }
   async acknowledgeChannel(data: any) {
+    console.log(data.channel);
     switch (data.channel) {
+      case ENUM.CHANNEL_TYPE.REDIS:
+        {
+          await this.redisService.insertOrUpdateByIdRedis(data.userId);
+        }
     }
   }
 }
